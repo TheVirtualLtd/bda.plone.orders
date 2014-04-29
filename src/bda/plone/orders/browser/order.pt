@@ -143,7 +143,17 @@
     </div>
 
     <div class="order_comment">
-      <h3 i18n:translate="order_comment">Order Comment:</h3>
+      <h3 i18n:translate="additional_info">Additional Info:</h3>
+      <strong i18n:translate="order_comment_purchase_order">Purchase Order:</strong>
+      <span tal:content="order/order_comment.purchase_order"
+         tal:condition="order/order_comment.purchase_order|nothing">purchase_order</span>
+      <span tal:condition="not:order/order_comment.purchase_order|nothing"
+         i18n:translate="order_no_purchase_order">
+        No Purchase Order
+      </span>
+      <br />
+      <br />
+      <strong i18n:translate="order_comment_comment">Order Comment:</strong>
       <p tal:content="order/order_comment.comment"
          tal:condition="order/order_comment.comment">comment</p>
       <p tal:condition="not:order/order_comment.comment"

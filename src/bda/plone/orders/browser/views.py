@@ -206,6 +206,9 @@ class Transition(BrowserView):
                 raise Unauthorized
         transitions = OrderTransitions(self.context)
         order = transitions.do_transition(uid, vendor_uids, transition)
+        # disable diazo theming if ajax call
+        if '_' in self.request.form:
+            self.request.response.setHeader('X-Theme-Disabled', 'True')
         return self.dropdown(self.context, self.request, order).render()
 
 
@@ -318,6 +321,9 @@ class OrdersView(OrdersViewBase):
         # check if authenticated user is vendor
         if not get_vendors_for():
             raise Unauthorized
+        # disable diazo theming if ajax call
+        if '_' in self.request.form:
+            self.request.response.setHeader('X-Theme-Disabled', 'True')
         return super(OrdersView, self).__call__()
 
 
@@ -466,7 +472,7 @@ class OrdersTable(OrdersTableBase):
             'title': _('notify_customers',
                        default=u'Notify customers of selected orders'),
         }
-        notify_customers = tag('a', '&nbsp', **notify_customers_attributes)
+        notify_customers = tag('a', '&nbsp;', **notify_customers_attributes)
         return select_all_orders + notify_customers
 
     def render_order_actions(self, colname, record):
@@ -489,7 +495,7 @@ class OrdersTable(OrdersTableBase):
             'href': '',
             'title': _('view_order', default=u'View Order'),
         }
-        view_order = tag('a', '&nbsp', **view_order_attrs)
+        view_order = tag('a', '&nbsp;', **view_order_attrs)
         select_order_attrs = {
             'name': 'select_order',
             'type': 'checkbox',
@@ -778,6 +784,9 @@ class OrderView(OrderViewBase):
             self.vendor_uids = get_vendor_uids_for()
             if not self.vendor_uids:
                 raise Unauthorized
+        # disable diazo theming if ajax call
+        if '_' in self.request.form:
+            self.request.response.setHeader('X-Theme-Disabled', 'True')
         return super(OrderView, self).__call__()
 
     @property
@@ -796,6 +805,9 @@ class MyOrderView(OrderViewBase):
         user = plone.api.user.get_current()
         if user.getId() != self.order['creator']:
             raise Unauthorized
+        # disable diazo theming if ajax call
+        if '_' in self.request.form:
+            self.request.response.setHeader('X-Theme-Disabled', 'True')
         return super(MyOrderView, self).__call__()
 
 
@@ -944,6 +956,7 @@ ORDER_EXPORT_ATTRS = [
     'delivery_address.street',
     'delivery_address.lastname',
     'delivery_address.zip',
+    'order_comment.purchase_order',
     'order_comment.comment',
     'payment_selection.payment',
 ]
