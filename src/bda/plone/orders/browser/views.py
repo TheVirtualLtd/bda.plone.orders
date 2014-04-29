@@ -736,7 +736,12 @@ class OrderViewBase(BrowserView):
 
     @property
     def payment(self):
-        return self.order['payment_label']
+        # XXX: either failure in upgrade step or node.ext.zodb bug
+        #      figure out
+        # order = self.order
+        order = self.order_data.order.attrs
+        title = translate(order['payment_label'], context=self.request)
+        return title
 
     @property
     def salaried(self):
@@ -1216,6 +1221,17 @@ class ExportOrdersContextual(BrowserView):
         ret = sio.getvalue()
         sio.close()
         return ret
+
+
+class OrderDone(BrowserView):
+
+    def id(self):
+        uid = self.request.get('uid', None)
+        try:
+            order = get_order(self.context, uid)
+        except ValueError:
+            return None
+        return order.attrs.get('ordernumber')
 
 
 class ReservationDone(BrowserView):

@@ -36,15 +36,13 @@ ZIP: %(billing_address.zip)s
 City: %(billing_address.city)s
 Country: %(billing_address.country)s
 %(delivery_address)s
-Purchase Order:
-%(order_comment.purchase_order)s
 Comment:
 %(order_comment.comment)s
 
 Ordered items:
 %(item_listing)s
 
-%(global_text)s
+%(order_summery)s%(global_text)s%(payment_text)s
 """
 
 RESERVATION_BODY_EN = """
@@ -67,17 +65,13 @@ ZIP: %(billing_address.zip)s
 City: %(billing_address.city)s
 Country: %(billing_address.country)s
 %(delivery_address)s
-Purchase Order:
-%(order_comment.purchase_order)s
 Comment:
 %(order_comment.comment)s
 
 Ordered items:
 %(item_listing)s
 
-Total: %(order_total)s
-
-%(global_text)s
+%(order_summery)s%(global_text)s%(payment_text)s
 """
 
 DELIVERY_ADDRESS_EN = """
@@ -119,17 +113,13 @@ Postleitzahl: %(billing_address.zip)s
 Ort: %(billing_address.city)s
 Land: %(billing_address.country)s
 %(delivery_address)s
-Purchase Order:
-%(order_comment.purchase_order)s
 Kommentar:
 %(order_comment.comment)s
 
 Bestellte Artikel:
 %(item_listing)s
 
-Total: %(order_total)s
-
-%(global_text)s
+%(order_summery)s%(global_text)s%(payment_text)s
 """
 
 RESERVATION_BODY_DE = """
@@ -152,17 +142,13 @@ Postleitzahl: %(billing_address.zip)s
 Ort: %(billing_address.city)s
 Land: %(billing_address.country)s
 %(delivery_address)s
-Purchase Order:
-%(order_comment.purchase_order)s
 Kommentar:
 %(order_comment.comment)s
 
 Bestellte Artikel:
 %(item_listing)s
 
-Total: %(order_total)s
-
-%(global_text)s
+%(order_summery)s%(global_text)s%(payment_text)s
 """
 
 DELIVERY_ADDRESS_DE = """
@@ -204,17 +190,13 @@ No. Postal: %(billing_address.zip)s
 Localité: %(billing_address.city)s
 Pays: %(billing_address.country)s
 %(delivery_address)s
-Purchase Order:
-%(order_comment.purchase_order)s
 Commentaires:
 %(order_comment.comment)s
 
 Produit commandé:
 %(item_listing)s
 
-Total: %(order_total)s
-
-%(global_text)s
+%(order_summery)s%(global_text)s%(payment_text)s
 """
 
 RESERVATION_BODY_FR = """
@@ -237,17 +219,13 @@ No. Postal: %(billing_address.zip)s
 Localité: %(billing_address.city)s
 Pays: %(billing_address.country)s
 %(delivery_address)s
-Purchase Order:
-%(order_comment.purchase_order)s
 Commentaires:
 %(order_comment.comment)s
 
 Produit commandé:
 %(item_listing)s
 
-Total: %(order_total)s
-
-%(global_text)s
+%(order_summery)s%(global_text)s%(payment_text)s
 """
 
 DELIVERY_ADDRESS_FR = """
@@ -288,17 +266,13 @@ CAP: %(billing_address.zip)s
 Città: %(billing_address.city)s
 Nazione: %(billing_address.country)s
 %(delivery_address)s
-Purchase Order:
-%(order_comment.purchase_order)s
 Commento:
 %(order_comment.comment)s
 
 Articolo ordinato:
 %(item_listing)s
 
-Totale: %(order_total)s
-
-%(global_text)s
+%(order_summery)s%(global_text)s%(payment_text)s
 """
 
 RESERVATION_BODY_IT = """
@@ -320,17 +294,13 @@ CAP: %(billing_address.zip)s
 Città: %(billing_address.city)s
 Nazione: %(billing_address.country)s
 %(delivery_address)s
-Purchase Order:
-%(order_comment.purchase_order)s
 Commento:
 %(order_comment.comment)s
 
 Articolo ordinato:
 %(item_listing)s
 
-Totale: %(order_total)s
-
-%(global_text)s
+%(order_summery)s%(global_text)s%(payment_text)s
 """
 
 DELIVERY_ADDRESS_IT = """
@@ -371,17 +341,13 @@ Postnr.: %(billing_address.zip)s
 Poststed: %(billing_address.city)s
 Land: %(billing_address.country)s
 %(delivery_address)s
-Purchase Order:
-%(order_comment.purchase_order)s
 Kommentar:
 %(order_comment.comment)s
 
 Bestilte produkter:
 %(item_listing)s
 
-Total: %(order_total)s
-
-%(global_text)s
+%(order_summery)s%(global_text)s%(payment_text)s
 """
 
 RESERVATION_BODY_NO = """
@@ -404,17 +370,13 @@ Postnr.: %(billing_address.zip)s
 Poststed: %(billing_address.city)s
 Land: %(billing_address.country)s
 %(delivery_address)s
-Purchase Order:
-%(order_comment.purchase_order)s
 Kommentar:
 %(order_comment.comment)s
 
 Bestilte produkter:
 %(item_listing)s
 
-Totale: %(order_total)s
-
-%(global_text)s
+%(order_summery)s%(global_text)s%(payment_text)s
 """
 
 DELIVERY_ADDRESS_NO = """
@@ -564,7 +526,6 @@ class DynamicMailTemplate(object):
         template
             a unicode string meant to be rendered using python string format
             method
-
         """
         assert isinstance(template, unicode), 'template must be unicode'
         try:
@@ -576,7 +537,8 @@ class DynamicMailTemplate(object):
         return True, ''
 
     def __call__(self, template, data):
-        """render template with data"""
+        """render template with data
+        """
         assert isinstance(template, unicode), 'template must be unicode'
         for key in self.required:
             if key not in data:
@@ -585,6 +547,7 @@ class DynamicMailTemplate(object):
 
 
 DYNAMIC_MAIL_LIBRARY_KEY = "bda.plone.order.dynamic_mail_lib"
+
 
 @implementer(IDynamicMailTemplateLibrary)
 class DynamicMailTemplateLibraryAquierer(object):
@@ -660,4 +623,3 @@ class DynamicMailTemplateLibraryStorage(DynamicMailTemplateLibraryAquierer):
 
     def __delitem__(self, name):
         del self._storage[name]
-
