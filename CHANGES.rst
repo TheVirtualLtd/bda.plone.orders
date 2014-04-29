@@ -2,14 +2,36 @@
 Changelog
 =========
 
-0.4dev
+0.5dev
 ------
 
-- Change browser view and adapter regitrations from IPloneSiteRoot to
-  `zope.component.interfaces.ISite`. That's needed for Lineage compatibility.
+- Improve mail notification.
+  [rnix]
+
+- Change ``IPaymentText.payment_text`` from property to function and accept
+  payment method id as argument.
+  [rnix]
+
+- Add ``@@exportorders_contextual`` view to export all orders of a context and
+  below.
   [thet]
 
-- Integrate @@showorder view to access information for a specific order for
+- Adopt shipping handling to ``bda.plone.shipping`` >= 0.4.
+  [rnix]
+
+- Introduce ``INotificationSettings`` which provides ``admin_name`` and
+  ``admin_email`` attributes. Use these settings for sending notifications.
+  [fRiSi, rnix]
+
+
+0.4
+---
+
+- Change browser view and adapter regitrations from ``IPloneSiteRoot`` to
+  ``zope.component.interfaces.ISite``. That's needed for Lineage compatibility.
+  [thet]
+
+- Integrate ``@@showorder`` view to access information for a specific order for
   anonymous users by giving the ordernumber and email as credentials.
   [thet]
 

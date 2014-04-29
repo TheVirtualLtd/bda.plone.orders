@@ -36,8 +36,17 @@ class IVendor(IDiscountSettingsEnabled):
     """
 
 
+class INotificationSettings(Interface):
+    """Interface for looking up mail notification settings.
+    """
+
+    admin_email = Attribute(u"Shop admin email address")
+
+    admin_name = Attribute(u"Shop admin name")
+
+
 class IItemNotificationText(Interface):
-    """Interface for providing buyable item order notification text.
+    """Interface for providing notification text for items in order.
     """
 
     order_text = Attribute(u"Text sent after successful checkout for item")
@@ -64,8 +73,9 @@ class IPaymentText(Interface):
     """Interface for providing payment related order notification text.
     """
 
-    payment_text = Attribute(
-        u"Text sent after successful checkout for payment")
+    def payment_text(payment):
+        """Text sent after successful checkout for payment
+        """
 
 
 class IDynamicMailTemplateLibrary(Interface):
