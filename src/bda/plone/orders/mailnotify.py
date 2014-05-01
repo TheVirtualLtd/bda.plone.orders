@@ -2,7 +2,8 @@ from Products.CMFCore.utils import getToolByName
 from Products.CMFPlone.utils import safe_unicode
 from bda.plone.cart import ascur
 from bda.plone.cart import get_catalog_brain
-from bda.plone.orders import common
+from bda.plone.checkout.interfaces import ICheckoutSettings
+from bda.plone.checkout.interfaces import ICheckoutEvent
 from bda.plone.orders import interfaces as ifaces
 from bda.plone.orders import message_factory as _
 from bda.plone.orders import safe_encode
@@ -14,6 +15,7 @@ from bda.plone.orders.interfaces import INotificationSettings
 from bda.plone.orders.interfaces import IPaymentText
 from bda.plone.orders.mailtemplates import get_order_templates
 from bda.plone.orders.mailtemplates import get_reservation_templates
+from bda.plone.payment.interfaces import IPaymentEvent
 from email.Header import Header
 from email.MIMEText import MIMEText
 from email.Utils import formatdate
@@ -217,13 +219,17 @@ def create_global_text(context, order_data):
             if text:
                 notifications.add(text)
     global_text = '\n\n'.join([safe_encode(line) for line in notifications])
-    return '\n\n' + global_text + '\n'
+    if global_text.strip():
+        return '\n\n' + global_text.strip() + '\n'
+    return ''
 
 
 def create_payment_text(context, order_data):
     payment = order_data.order.attrs['payment_method']
     payment_text = safe_encode(IPaymentText(getSite()).payment_text(payment))
-    return '\n\n' + payment_text + '\n'
+    if payment_text.strip():
+        return '\n\n' + payment_text.strip() + '\n'
+    return ''
 
 
 def create_mail_body(templates, context, order_data):
@@ -278,36 +284,46 @@ def do_notify(context, order_data, templates):
             logger.error("Email could not be sent: %s" % str(e))
 
 
+def get_order_uid(event):
+    if ICheckoutEvent.providedBy(event):
+        return event.uid
+    if IPaymentEvent.providedBy(event):
+        return event.order_uid
+
+
+def notify_order_success(event):
+    """Send notification mail after order succeed.
+    """
+    order_data = OrderData(event.context, uid=get_order_uid(event))
+    templates = dict()
+    state = order_data.state
+    if state == ifaces.STATE_RESERVED:
+        templates.update(get_reservation_templates(event.context))
+    elif state == ifaces.STATE_MIXED:
+        # XXX: mixed templates
+        templates.update(get_reservation_templates(event.context))
+    else:
+        templates.update(get_order_templates(event.context))
+    templates['item_listing_callback'] = create_mail_listing
+    templates['order_summery_callback'] = create_order_summery
+    templates['global_text_callback'] = create_global_text
+    templates['payment_text_callback'] = create_payment_text
+    do_notify(event.context, order_data, templates)
+
+
+def notify_checkout_success(event):
+    """Send notification mail after checkout succeed.
+    """
+    # if skip payment, do notification
+    checkout_settings = ICheckoutSettings(event.context)
+    if checkout_settings.skip_payment(get_order_uid(event)):
+        notify_order_success(event)
+
+
 def notify_payment_success(event):
     """Send notification mail after payment succeed.
     """
-    templates = dict()
-    templates.update(get_order_templates(event.context))
-    templates['item_listing_callback'] = create_mail_listing
-    templates['order_summery_callback'] = create_order_summery
-    templates['global_text_callback'] = create_global_text
-    templates['payment_text_callback'] = create_payment_text
-    order_data = OrderData(event.context, uid=event.order_uid)
-    do_notify(event.context, order_data, templates)
-
-
-def notify_reservation_if_payment_skipped(event):
-    """Send notification mail after checkout done if reservation and payment
-    skipped.
-    """
-    if not common.SKIP_PAYMENT_IF_RESERVED:
-        return
-    order_data = OrderData(event.context, uid=event.uid)
-    # TODO: state mixed might be handled separately
-    if order_data.state not in (ifaces.STATE_RESERVED, ifaces.STATE_MIXED):
-        return
-    templates = dict()
-    templates.update(get_reservation_templates(event.context))
-    templates['item_listing_callback'] = create_mail_listing
-    templates['order_summery_callback'] = create_order_summery
-    templates['global_text_callback'] = create_global_text
-    templates['payment_text_callback'] = create_payment_text
-    do_notify(event.context, order_data, templates)
+    notify_order_success(event)
 
 
 class MailNotify(object):
