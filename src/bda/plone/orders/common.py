@@ -17,6 +17,7 @@ from bda.plone.orders.interfaces import IVendor
 from bda.plone.payment import Payments
 from bda.plone.payment.interfaces import IPaymentData
 from bda.plone.shipping import Shippings
+from bda.plone.shipping.interfaces import IShippingItem
 from bda.plone.shop.interfaces import IBuyable # XXX: dependency inversion
 from decimal import Decimal
 from node.ext.zodb import OOBTNode
@@ -234,14 +235,6 @@ class OrderCheckoutAdapter(CheckoutAdapter):
     def items(self):
         return extractitems(readcookie(self.request))
 
-    @property
-    def shipping_selection_exists(self):
-        return 'checkout.shipping_selection.shipping' in self.request.form
-
-    @property
-    def payment_selection_exists(self):
-        return 'checkout.payment_selection.payment' in self.request.form
-
     def ordernumber_exists(self, soup, ordernumber):
         for order in soup.query(Eq('ordernumber', ordernumber)):
             return bool(order)
@@ -261,9 +254,11 @@ class OrderCheckoutAdapter(CheckoutAdapter):
         # order creation date
         created = datetime.datetime.now()
         order.attrs['created'] = created
+        cart_data = get_data_provider(self.context, self.request)
         # payment related information
-        if self.payment_selection_exists:
-            pid = data.fetch('checkout.payment_selection.payment').extracted
+        if cart_data.total > Decimal(0):
+            payment_param = 'checkout.payment_selection.payment'
+            pid = data.fetch(payment_param).extracted
             payment = Payments(self.context).get(pid)
             order.attrs['payment_method'] = pid
             if payment:
@@ -276,8 +271,9 @@ class OrderCheckoutAdapter(CheckoutAdapter):
             order.attrs['payment_label'] = _('no_payment',
                                              default=u'No Payment')
         # shipping related information
-        if self.shipping_selection_exists:
-            sid = data.fetch('checkout.shipping_selection.shipping').extracted
+        if cart_data.include_shipping_costs:
+            shipping_param = 'checkout.shipping_selection.shipping'
+            sid = data.fetch(shipping_param).extracted
             shipping = Shippings(self.context).get(sid)
             order.attrs['shipping_method'] = sid
             order.attrs['shipping_label'] = shipping.label
@@ -314,7 +310,6 @@ class OrderCheckoutAdapter(CheckoutAdapter):
         order.attrs['booking_uids'] = booking_uids
         order.attrs['vendor_uids'] = list(vendor_uids)
         # cart discount related information
-        cart_data = get_data_provider(self.context)
         cart_discount = cart_data.discount(self.items)
         order.attrs['cart_discount_net'] = cart_discount['net']
         order.attrs['cart_discount_vat'] = cart_discount['vat']
@@ -380,6 +375,7 @@ class OrderCheckoutAdapter(CheckoutAdapter):
         booking.attrs['state'] = state
         booking.attrs['salaried'] = ifaces.SALARIED_NO
         booking.attrs['tid'] = 'none'
+        booking.attrs['shippable'] = IShippingItem(buyable).shippable
         return booking
 
 
