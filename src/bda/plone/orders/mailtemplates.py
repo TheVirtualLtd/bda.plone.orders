@@ -36,6 +36,8 @@ ZIP: %(billing_address.zip)s
 City: %(billing_address.city)s
 Country: %(billing_address.country)s
 %(delivery_address)s
+Purchase Order:
+%(order_comment.purchase_order)s
 Comment:
 %(order_comment.comment)s
 
@@ -65,6 +67,8 @@ ZIP: %(billing_address.zip)s
 City: %(billing_address.city)s
 Country: %(billing_address.country)s
 %(delivery_address)s
+Purchase Order:
+%(order_comment.purchase_order)s
 Comment:
 %(order_comment.comment)s
 
@@ -113,6 +117,8 @@ Postleitzahl: %(billing_address.zip)s
 Ort: %(billing_address.city)s
 Land: %(billing_address.country)s
 %(delivery_address)s
+Purchase Order:
+%(order_comment.purchase_order)s
 Kommentar:
 %(order_comment.comment)s
 
@@ -142,6 +148,8 @@ Postleitzahl: %(billing_address.zip)s
 Ort: %(billing_address.city)s
 Land: %(billing_address.country)s
 %(delivery_address)s
+Purchase Order:
+%(order_comment.purchase_order)s
 Kommentar:
 %(order_comment.comment)s
 
@@ -190,6 +198,8 @@ No. Postal: %(billing_address.zip)s
 Localité: %(billing_address.city)s
 Pays: %(billing_address.country)s
 %(delivery_address)s
+Purchase Order:
+%(order_comment.purchase_order)s
 Commentaires:
 %(order_comment.comment)s
 
@@ -219,6 +229,8 @@ No. Postal: %(billing_address.zip)s
 Localité: %(billing_address.city)s
 Pays: %(billing_address.country)s
 %(delivery_address)s
+Purchase Order:
+%(order_comment.purchase_order)s
 Commentaires:
 %(order_comment.comment)s
 
@@ -266,6 +278,8 @@ CAP: %(billing_address.zip)s
 Città: %(billing_address.city)s
 Nazione: %(billing_address.country)s
 %(delivery_address)s
+Purchase Order:
+%(order_comment.purchase_order)s
 Commento:
 %(order_comment.comment)s
 
@@ -294,6 +308,8 @@ CAP: %(billing_address.zip)s
 Città: %(billing_address.city)s
 Nazione: %(billing_address.country)s
 %(delivery_address)s
+Purchase Order:
+%(order_comment.purchase_order)s
 Commento:
 %(order_comment.comment)s
 
@@ -341,6 +357,8 @@ Postnr.: %(billing_address.zip)s
 Poststed: %(billing_address.city)s
 Land: %(billing_address.country)s
 %(delivery_address)s
+Purchase Order:
+%(order_comment.purchase_order)s
 Kommentar:
 %(order_comment.comment)s
 
@@ -370,6 +388,8 @@ Postnr.: %(billing_address.zip)s
 Poststed: %(billing_address.city)s
 Land: %(billing_address.country)s
 %(delivery_address)s
+Purchase Order:
+%(order_comment.purchase_order)s
 Kommentar:
 %(order_comment.comment)s
 
@@ -473,6 +493,7 @@ DEFAULT_TEMPLATE_ATTRS = {
     'billing_address.country': 'Austria',
     'billing_address.street': 'Musterstrasse',
     'billing_address.zip': '1234',
+    'purchase order:': 'order number',
     'order_comment.comment': 'Comment',
     'payment_selection.payment': 'six_payment',
 }
