@@ -669,10 +669,9 @@ class OrderViewBase(BrowserView):
 
     @property
     def shipping_title(self):
-        # XXX: either failure in upgrade step or node.ext.zodb bug
-        #      figure out
-        # order = self.order
+        # XXX: node.ext.zodb or souper bug with double linked list. figure out
         order = self.order_data.order.attrs
+        #order = self.order
         title = translate(order['shipping_label'], context=self.request)
         if order['shipping_description']:
             title += ' (%s)' % translate(order['shipping_description'],
@@ -736,10 +735,9 @@ class OrderViewBase(BrowserView):
 
     @property
     def payment(self):
-        # XXX: either failure in upgrade step or node.ext.zodb bug
-        #      figure out
-        # order = self.order
+        # XXX: node.ext.zodb or souper bug with double linked list. figure out
         order = self.order_data.order.attrs
+        #order = self.order
         title = translate(order['payment_label'], context=self.request)
         return title
 
