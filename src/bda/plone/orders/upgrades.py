@@ -202,8 +202,9 @@ def fix_payment_attrs(ctx=None):
     orders_soup = get_orders_soup(portal)
     data = orders_soup.storage.data
     for item in data.values():
-        if not 'payment_method' in item.attrs:
-            continue
+        if ('payment_method' not in item.attrs and
+            'payment_selection.payment' not in item.attrs):
+                continue
         payment_method = item.attrs['payment_selection.payment']
         payment = payments.get(payment_method)
         if payment:
