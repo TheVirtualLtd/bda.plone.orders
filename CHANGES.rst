@@ -2,8 +2,50 @@
 Changelog
 =========
 
-0.5dev
-------
+0.7.dev0
+--------
+
+- no changes yet.
+
+
+0.6
+---
+
+- Introduce ``ViewOwnOrders`` (``bda.plone.orders: View Own Orders``) to
+  protect ``@@myorders`` and descendant views with a dedicated permission.
+  [thet]
+
+
+0.5
+---
+
+- Add ``bda.plone.orders.ExportOrders`` permission and bind export related
+  views to it.
+  [rnix]
+
+- Fix ``PaymentData.description`` unicode error.
+  [rnix]
+
+- Add upgrade step to reset all soup records attributes storage.
+  [rnix]
+
+- Include ``jquery-barcode`` from http://barcode-coder.com - not delivered to
+  the client or used yet.
+  [rnix]
+
+- Include ``qrcode.js`` from http://davidshimjs.github.io/qrcodejs/ and render
+  QR Code for order uuid in order view.
+  [rnix]
+
+- Move Javascript and CSS to resources folder.
+  [rnix]
+
+- Add ``bda.plone.orders.interfaces.ITrading`` and consider contract when
+  creating order bookings.
+  [rnix]
+
+- Translate ``customers_notified_success`` ajax message directly in view class.
+  [rnix]
 
 - Add ``shippable`` flag to order bookings and implement upgrade step.
   [rnix]

@@ -4,12 +4,14 @@ from bda.plone.orders.common import acquire_vendor_or_shop_root
 from bda.plone.orders.common import get_bookings_soup
 from bda.plone.orders.common import get_orders_soup
 from bda.plone.orders.common import OrderData
+from bda.plone.orders.interfaces import ITrading
 from bda.plone.payment import Payments
 from bda.plone.shipping.interfaces import IShippingItem
 from decimal import Decimal
 from plone.app.uuid.utils import uuidToObject
 from plone.uuid.interfaces import IUUID
 from zope.component.hooks import getSite
+from node.ext.zodb.utils import reset_odict
 
 import logging
 import uuid
@@ -305,3 +307,62 @@ def fix_bookings_shippable(ctx=None):
         bookings_soup = get_bookings_soup(portal)
         bookings_soup.rebuild()
         logging.info("Rebuilt bookings catalog")
+
+
+def fix_bookings_trading(ctx=None):
+    portal = getSite()
+    soup = get_bookings_soup(portal)
+    data = soup.storage.data
+    need_rebuild = False
+    for booking in data.values():
+        try:
+            booking.attrs['item_number']
+        except KeyError:
+            obj = get_object_by_uid(portal, booking.attrs['buyable_uid'])
+            if obj:
+                trading = ITrading(obj)
+                item_number = trading.item_number
+                gtin = trading.gtin
+            else:
+                item_number = ''
+                gtin = ''
+            need_rebuild = True
+            booking.attrs['item_number'] = item_number
+            logging.info(
+                "Added item_number {0} to booking {1}".format(
+                    item_number, booking.attrs['uid']
+                )
+            )
+            booking.attrs['gtin'] = gtin
+            logging.info(
+                "Added gtin {0} to booking {1}".format(
+                    gtin, booking.attrs['uid']
+                )
+            )
+    if need_rebuild:
+        bookings_soup = get_bookings_soup(portal)
+        bookings_soup.rebuild()
+        logging.info("Rebuilt bookings catalog")
+
+
+def reset_records(ctx=None):
+    ignore_key = lambda x: x.startswith('____')
+    portal = getSite()
+    soup = get_orders_soup(portal)
+    data = soup.storage.data
+    for order in data.values():
+        reset_odict(order.attrs.storage, ignore_key=ignore_key)
+        logging.info(
+                "Reset attributes storage on order {0}".format(
+                    order.attrs['uid'],
+                )
+            )
+    soup = get_bookings_soup(portal)
+    data = soup.storage.data
+    for booking in data.values():
+        reset_odict(booking.attrs.storage, ignore_key=ignore_key)
+        logging.info(
+                "Reset attributes storage on booking {0}".format(
+                    booking.attrs['uid']
+                )
+            )

@@ -13,6 +13,7 @@ from bda.plone.checkout import CheckoutError
 from bda.plone.orders import permissions
 from bda.plone.orders import interfaces as ifaces
 from bda.plone.orders import message_factory as _
+from bda.plone.orders import safe_encode
 from bda.plone.orders.interfaces import IVendor
 from bda.plone.payment import Payments
 from bda.plone.payment.interfaces import IPaymentData
@@ -358,6 +359,7 @@ class OrderCheckoutAdapter(CheckoutAdapter):
             or ifaces.STATE_RESERVED
         item_data = get_item_data_provider(buyable)
         vendor = acquire_vendor_or_shop_root(buyable)
+        trading_info = ifaces.ITrading(buyable)
         booking = OOBTNode()
         booking.attrs['uid'] = uuid.uuid4()
         booking.attrs['buyable_uid'] = uid
@@ -379,6 +381,8 @@ class OrderCheckoutAdapter(CheckoutAdapter):
         booking.attrs['salaried'] = ifaces.SALARIED_NO
         booking.attrs['tid'] = 'none'
         booking.attrs['shippable'] = IShippingItem(buyable).shippable
+        booking.attrs['item_number'] = trading_info.item_number
+        booking.attrs['gtin'] = trading_info.gtin
         return booking
 
 
@@ -618,7 +622,7 @@ class PaymentData(object):
             attrs['personal_data.firstname'],
             attrs['personal_data.lastname'],
             attrs['billing_address.city'],
-            amount])
+            safe_encode(amount)])
         return description
 
     @property
