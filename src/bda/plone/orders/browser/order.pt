@@ -48,6 +48,10 @@
       <span tal:replace="order/billing_address.zip">zip</span>
       <span tal:replace="order/billing_address.city">city</span>
       <br />
+      <strong i18n:translate="order_region">Region:</strong>
+      <span tal:content="order/billing_address.region"
+          tal:condition="order/billing_address.region|nothing">region</span>
+      <br />
       <strong i18n:translate="order_country">Country:</strong>
       <span tal:replace="python:view.country(order['billing_address.country'])">
         country
@@ -126,12 +130,20 @@
       <strong i18n:translate="order_company">Company:</strong>
       <span tal:replace="order/delivery_address.company">company</span>
       <br />
+      <strong i18n:translate="order_phone">Phone:</strong>
+      <span tal:content="order/delivery_address.phone"
+          tal:condition="order/delivery_address.phone|nothing">phone</span>
+      <br />
       <strong i18n:translate="order_street">Street:</strong>
       <span tal:replace="order/delivery_address.street">street</span>
       <br />
       <strong i18n:translate="order_zip_city">ZIP/City:</strong>
       <span tal:replace="order/delivery_address.zip">zip</span>
       <span tal:replace="order/delivery_address.city">city</span>
+      <br />
+      <strong i18n:translate="order_region">Region:</strong>
+      <span tal:content="order/delivery_address.region"
+          tal:condition="order/delivery_address.region|nothing">region</span>
       <br />
       <strong i18n:translate="order_country">Country:</strong>
       <span tal:replace="python:view.country(order['delivery_address.country'])">
@@ -179,6 +191,7 @@
           <tr tal:condition="start">
             <th i18n:translate="booking_title">title</th>
             <th i18n:translate="booking_count">count</th>
+            <th i18n:translate="reserved">reserved</th>
             <th i18n:translate="booking_quantity_unit">quantity unit</th>
             <th i18n:translate="booking_currency">currency</th>
             <th i18n:translate="booking_net">net</th>
@@ -191,6 +204,7 @@
           <tr tal:attributes="class python:even and 'even' or 'odd'">
             <td><a href="row/url" target="_blank" tal:attributes="href row/url" tal:content="row/title">title</a></td>
             <td tal:content="row/count">count</td>
+            <td tal:content="row/reserved">reserved</td>
             <td tal:content="row/quantity_unit">quantity</td>
             <td tal:content="row/currency">EUR</td>
             <td tal:content="row/net">net</td>

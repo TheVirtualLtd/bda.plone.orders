@@ -50,6 +50,16 @@ import uuid
 import yafowil.loader  # loads registry  # nopep8
 
 
+def reserved(available, ordered):
+    reserved = ''
+    if available and available < 0.0 and ordered > 0.0:
+        available = Decimal(available)
+        reserved = ordered
+        if ordered + available > 0.0:
+            reserved = ordered + available
+    return reserved
+
+
 class Translate(object):
 
     def __init__(self, request):
@@ -712,6 +722,9 @@ class OrderViewBase(BrowserView):
         for booking in self.order_data.bookings:
             ret.append({
                 'title': booking.attrs['title'],
+                'reserved': reserved(
+                    booking.attrs['remaining_stock_available'],
+                    booking.attrs['buyable_count']),
                 'url': uuidToURL(booking.attrs['buyable_uid']),
                 'count': booking.attrs['buyable_count'],
                 'net': ascur(booking.attrs.get('net', 0.0)),
@@ -748,7 +761,7 @@ class OrderViewBase(BrowserView):
 
     @property
     def tid(self):
-        tid = [it for it in self.order_data.tid if it != 'none']
+        tid = [str(it) for it in self.order_data.tid if it != 'none']
         if not tid:
             return _('none', default=u'None')
         return ', '.join(tid)
@@ -949,6 +962,7 @@ ORDER_EXPORT_ATTRS = [
     'personal_data.lastname',
     'billing_address.city',
     'billing_address.country',
+    'billing_address.region',
     'billing_address.street',
     'billing_address.zip',
     'delivery_address.alternative_delivery',
@@ -956,6 +970,7 @@ ORDER_EXPORT_ATTRS = [
     'delivery_address.company',
     'delivery_address.country',
     'delivery_address.firstname',
+    'delivery_address.region',
     'delivery_address.street',
     'delivery_address.lastname',
     'delivery_address.zip',

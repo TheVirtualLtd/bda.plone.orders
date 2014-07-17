@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: bda.plone.orders\n"
 "POT-Creation-Date: 2014-07-16 22:31+0000\n"
-"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
-"Last-Translator: Peter Holzer <hpeter@agitator.com>\n"
-"Language-Team: LANGUAGE <LL@li.org>\n"
+"PO-Revision-Date: 2014-06-04 14:47 +1200\n"
+"Last-Translator: Robyn James <robyn@thevirtual.co.nz>\n"
+"Language-Team: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0\n"
-"Language-Code: en\n"
+"Language-Code: en-gb\n"
 "Language-Name: English\n"
 "Preferred-Encodings: utf-8 latin1\n"
 "Domain: bda.plone.orders\n"
@@ -22,7 +22,7 @@ msgstr "Actions"
 #. Default: "Additional Info:"
 #: ./browser/order.pt:162
 msgid "additional_info"
-msgstr ""
+msgstr "Additional Info"
 
 #. Default: "All"
 #: ./browser/views.py:416
@@ -32,218 +32,218 @@ msgstr "All"
 #. Default: "Please provide the email adress you used for submitting the order."
 #: ./browser/views.py:922
 msgid "anon_auth_err_email"
-msgstr "Please provide the email adress you used for submitting the order."
+msgstr ""
 
 #. Default: "No order could be found for the given credentials"
 #: ./browser/views.py:931
 msgid "anon_auth_err_order"
-msgstr "No order could be found for the given credentials"
+msgstr ""
 
 #. Default: "Please provide the ordernumber"
 #: ./browser/views.py:927
 msgid "anon_auth_err_ordernumber"
-msgstr "Please provide the ordernumber"
+msgstr "Please provide the Order Number"
 
 #. Default: "Email"
 #: ./browser/views.py:887
 msgid "anon_auth_label_email"
-msgstr "Email"
+msgstr ""
 
 #. Default: "Ordernumber"
 #: ./browser/views.py:878
 msgid "anon_auth_label_ordernumber"
-msgstr "Ordernumber"
+msgstr "Order Number"
 
 #. Default: "Submit"
 #: ./browser/views.py:894
 msgid "anon_auth_label_submit"
-msgstr "Submit"
+msgstr ""
 
 #. Default: "Billing Address:"
 #: ./browser/order.pt:43
 msgid "billing_address"
-msgstr "Billing Address:"
+msgstr ""
 
 #. Default: "comment"
 #: ./browser/order.pt:200
 msgid "booking_comment"
-msgstr "comment"
+msgstr "Comment:"
 
 #. Default: "count"
 #: ./browser/order.pt:192
 msgid "booking_count"
-msgstr "count"
+msgstr "Quantity"
 
 #. Default: "currency"
 #: ./browser/order.pt:195
 msgid "booking_currency"
-msgstr "currency"
+msgstr "Currency"
 
 #. Default: "discount net"
 #: ./browser/order.pt:197
 msgid "booking_discount_net"
-msgstr "discount net"
+msgstr "Net Discount"
 
 #. Default: "exported"
 #: ./browser/order.pt:199
 msgid "booking_exported"
-msgstr "exported"
+msgstr "Exported"
 
 #. Default: "net"
 #: ./browser/order.pt:196
 msgid "booking_net"
-msgstr "net"
+msgstr "Net Cost"
 
 #. Default: "quantity unit"
 #: ./browser/order.pt:194
 msgid "booking_quantity_unit"
-msgstr "quantity"
+msgstr "Units"
 
 #. Default: "title"
 #: ./browser/order.pt:191
 msgid "booking_title"
-msgstr "title"
+msgstr "Item Title"
 
 #. Default: "vat"
 #: ./browser/order.pt:198
 msgid "booking_vat"
-msgstr "vat"
+msgstr "VAT"
 
 #. Default: "Cancel"
 #: ./vocabularies.py:30
 msgid "cancel"
-msgstr "Cancel"
+msgstr ""
 
 #. Default: "Cancelled"
 #: ./vocabularies.py:18
 msgid "cancelled"
-msgstr "Cancelled"
+msgstr ""
 
 #. Default: "City"
 #: ./browser/views.py:402
 msgid "city"
-msgstr "City"
+msgstr ""
 
 #. Default: "Currency:"
 #: ./browser/order.pt:83
 msgid "currency"
-msgstr "Currency:"
+msgstr ""
 
 # customer_filter
 msgid "customer_filter"
-msgstr "Customer"
+msgstr "Customer Filter"
 
 #. Default: "Mail to customers sent"
 #: ./browser/notify_customers.py:111
 msgid "customers_notified_success"
-msgstr "Mail to customers sent"
+msgstr ""
 
 #. Default: "Date"
 #: ./browser/views.py:392
 msgid "date"
-msgstr "Date"
+msgstr ""
 
 #. Default: "Delivery Address:"
 #: ./browser/order.pt:125
 msgid "delivery_address"
-msgstr "Delivery Address:"
+msgstr ""
 
 #. Default: "Failed to send Notification to ${receiver}"
 #: ./mailnotify.py:290
 msgid "email_sending_failed"
-msgstr "Failed to send Notification to ${receiver}"
+msgstr ""
 
 # export
 msgid "export"
-msgstr "export"
+msgstr "Export"
 
 #. Default: "Export Orders"
 #: ./browser/export.pt:20
 msgid "export_orders"
-msgstr "Export Orders"
+msgstr ""
 
 #. Default: "Export recent orders as CSV (excel optimized)"
 #: ./browser/export.pt:25
 msgid "export_recent_orders"
-msgstr "Export recent orders as CSV (excel optimized)"
+msgstr "Export recent orders as CSV (Excel optimised)"
 
 #. Default: "Failed"
 #: ./vocabularies.py:39
 msgid "failed"
-msgstr "Failed"
+msgstr ""
 
 #. Default: "Filter for customers"
 #: ./browser/views.py:453
 msgid "filter_for_customers"
-msgstr "Filter for customers"
+msgstr ""
 
 #. Default: "Filter for vendors"
 #: ./browser/views.py:438
 msgid "filter_for_vendors"
-msgstr "Filter for vendors"
+msgstr ""
 
 #. Default: "Finish"
 #: ./vocabularies.py:29
 msgid "finish"
-msgstr "Finish"
+msgstr ""
 
 #. Default: "Finished"
 #: ./vocabularies.py:17
 msgid "finished"
-msgstr "Finished"
+msgstr ""
 
 #. Default: "First Name"
 #: ./browser/views.py:399
 msgid "firstname"
-msgstr "First Name"
+msgstr ""
 
 # from_date
 msgid "from_date"
-msgstr "from date"
+msgstr "From Date"
 
 #. Default: "From-date after to-date"
 #: ./browser/views.py:1048
 msgid "from_date_before_to_date"
-msgstr "From-date after to-date"
+msgstr "From Date must be earlier than To Date"
 
 # from_date_required
 msgid "from_date_required"
-msgstr "from date is required"
+msgstr "From Date required"
 
 #. Default: "Available placeholders:"
 #: ./browser/mailtemplates_view.pt:46
 msgid "heading_mailtemplatelib_available"
-msgstr "Available placeholders:"
+msgstr ""
 
 #. Default: "In templates named placeholders can be used. A placeholder is inserted by inserting the name of the placeholder in curly braces, like so: ${example}"
 #: ./browser/mailtemplates_view.pt:30
 msgid "heading_mailtemplatelib_example"
-msgstr "In templates named placeholders can be used. A placeholder is inserted by inserting the name of the placeholder in curly braces, like so: ${example}"
+msgstr ""
 
 #. Default: "Edit"
 #: ./browser/mailtemplates_view.pt:33
 msgid "heading_mailtemplatelib_library"
-msgstr "Edit"
+msgstr ""
 
 #. Default: "Mailtemplates for Order Notifications"
 #: ./browser/mailtemplates_view.pt:20
 msgid "heading_mailtemplatelib_main"
-msgstr "Mailtemplates for Order Notifications"
+msgstr ""
 
 #. Default: "Preview"
 #: ./browser/mailtemplates_view.pt:38
 msgid "heading_mailtemplatelib_preview"
-msgstr "Preview"
+msgstr ""
 
 #. Default: "Using placeholder:"
 #: ./browser/mailtemplates_view.pt:25
 msgid "heading_mailtemplatelib_using"
-msgstr "Using placeholder:"
+msgstr ""
 
 #. Default: "Found inconsistent Currencies on order related bookings. This should not happen at all!"
 #: ./browser/order.pt:89
 msgid "inconsistent_currencies"
-msgstr "Found inconsistent Currencies on order related bookings. This should not happen at all!"
+msgstr ""
 
 # label_mailtemplatelib_array
 msgid "label_mailtemplatelib_array"
@@ -269,73 +269,73 @@ msgstr "Last Name"
 #. Default: "Loading Data, please wait..."
 #: ./browser/table.pt:31
 msgid "loading_please_wait"
-msgstr "Loading Data, please wait..."
+msgstr ""
 
 #. Default: "Mark outstanding"
 #: ./vocabularies.py:49
 msgid "mark_outstanding"
-msgstr "Mark outstanding"
+msgstr ""
 
 #. Default: "Mark salaried"
 #: ./vocabularies.py:47
 msgid "mark_salaried"
-msgstr "Mark salaried"
+msgstr "Mark paid"
 
 #. Default: "Misses"
 #: ./browser/notify_customers.py:25
 msgid "misses"
-msgstr "Misses"
+msgstr "Ms"
 
 #. Default: "Mister"
 #: ./browser/notify_customers.py:24
 msgid "mister"
-msgstr "Mister"
+msgstr "Mr"
 
 #. Default: "Mister/Misses"
 #: ./browser/notify_customers.py:23
 msgid "mister_misses"
-msgstr "Mister/Misses"
+msgstr "Mr/Ms"
 
 #. Default: "Mixed"
 #: ./vocabularies.py:20
 msgid "mixed"
-msgstr "Mixed"
+msgstr ""
 
 #. Default: "New"
 #: ./vocabularies.py:15
 msgid "new"
-msgstr "New"
+msgstr ""
 
 #. Default: "No"
 #: ./browser/views.py:783
 #: ./vocabularies.py:38
 msgid "no"
-msgstr "No"
+msgstr ""
 
 #. Default: "No Payment"
 #: ./common.py:275
 msgid "no_payment"
-msgstr "No Payment"
+msgstr ""
 
 #. Default: "No Shipping"
 #: ./common.py:300
 msgid "no_shipping"
-msgstr "No Shipping"
+msgstr ""
 
 #. Default: "No template selected"
 #: ./browser/notify_customers.py:50
 msgid "no_template_selected"
-msgstr "No template selected"
+msgstr ""
 
 #. Default: "None"
 #: ./browser/views.py:766
 msgid "none"
-msgstr "None"
+msgstr ""
 
 #. Default: "Notify customers of selected orders"
 #: ./browser/views.py:482
 msgid "notify_customers"
-msgstr "Notify customers of selected orders"
+msgstr ""
 
 # notify_customers_heading
 msgid "notify_customers_heading"
@@ -344,7 +344,7 @@ msgstr "Notify customers"
 #. Default: "Order Bookings:"
 #: ./browser/order.pt:183
 msgid "order_bookings"
-msgstr "Order Bookings:"
+msgstr ""
 
 #. Default: "Order Comment:"
 #: ./browser/order.pt:172
@@ -359,72 +359,72 @@ msgstr ""
 #. Default: "Company:"
 #: ./browser/order.pt:35
 msgid "order_company"
-msgstr "Company:"
+msgstr ""
 
 #. Default: "Country:"
 #: ./browser/order.pt:55
 msgid "order_country"
-msgstr "Country:"
+msgstr ""
 
 #. Default: "Created:"
 #: ./browser/order.pt:65
 msgid "order_created"
-msgstr "Created:"
+msgstr ""
 
 #. Default: "Order Details"
 #: ./browser/order.pt:8
 msgid "order_details"
-msgstr "Order Details"
+msgstr ""
 
 #. Default: "Discount Net:"
 #: ./browser/order.pt:102
 msgid "order_discount_net"
-msgstr "Discount Net:"
+msgstr "Net Discount"
 
 #. Default: "Discount VAT:"
 #: ./browser/order.pt:105
 msgid "order_discount_vat"
-msgstr "Discount VAT:"
+msgstr "Discount VAT"
 
 #. Default: "Order Done"
 #: ./browser/views.py:1251
 msgid "order_done"
-msgstr "Order Done"
+msgstr "Order complete"
 
 #. Default: "continue"
 #: ./browser/order_done.pt:30
 msgid "order_done_continue"
-msgstr "continue"
+msgstr "Continue"
 
 #. Default: "Email:"
 #: ./browser/order.pt:32
 msgid "order_email"
-msgstr "Email:"
+msgstr ""
 
 #. Default: "Gender:"
 #: ./browser/order.pt:25
 msgid "order_gender"
-msgstr "Gender:"
+msgstr ""
 
 #. Default: "Name:"
 #: ./browser/order.pt:28
 msgid "order_name"
-msgstr "Name:"
+msgstr ""
 
 #. Default: "Net:"
 #: ./browser/order.pt:96
 msgid "order_net"
-msgstr "Net:"
+msgstr ""
 
 #. Default: "No Comment"
 #: ./browser/order.pt:175
 msgid "order_no_comment"
-msgstr "No Comment"
+msgstr ""
 
 #. Default: "No delivery Address defined"
 #: ./browser/order.pt:156
 msgid "order_no_delivery_address"
-msgstr "No delivery Address defined"
+msgstr ""
 
 #. Default: "No Purchase Order"
 #: ./browser/order.pt:166
@@ -434,77 +434,77 @@ msgstr ""
 #. Default: "Ordernumber:"
 #: ./browser/order.pt:19
 msgid "order_number"
-msgstr "Ordernumber:"
+msgstr "Order Number:"
 
 #. Default: "Your Order number: ${number}"
 #: ./browser/order_done.pt:25
 msgid "order_order_id"
-msgstr "Your Order number: ${number}"
+msgstr ""
 
 #. Default: "Payment:"
 #: ./browser/order.pt:68
 msgid "order_payment"
-msgstr "Payment:"
+msgstr "Payment Method:"
 
 #. Default: "Phone:"
 #: ./browser/order.pt:38
 msgid "order_phone"
-msgstr "Phone:"
+msgstr ""
 
 #. Default: "Region:"
 #: ./browser/order.pt:51
 msgid "order_region"
-msgstr ""
+msgstr "County:"
 
 #. Default: "Salaried:"
 #: ./browser/order.pt:71
 msgid "order_salaried"
-msgstr "Salaried:"
+msgstr "Paid:"
 
 #. Default: "Shipping Net:"
 #: ./browser/order.pt:111
 msgid "order_shipping_costs_net"
-msgstr "Shipping Net:"
+msgstr "Net Shipping"
 
 #. Default: "Shipping VAT:"
 #: ./browser/order.pt:114
 msgid "order_shipping_costs_vat"
-msgstr "Shipping VAT:"
+msgstr "Shipping VAT"
 
 #. Default: "Shipping:"
 #: ./browser/order.pt:108
 msgid "order_shipping_title"
-msgstr "Shipping:"
+msgstr ""
 
 #. Default: "State:"
 #: ./browser/order.pt:77
 msgid "order_state"
-msgstr "State:"
+msgstr ""
 
 #. Default: "Order State:"
 #: ./browser/order.pt:64
 msgid "order_state_heading"
-msgstr "Order State:"
+msgstr "Order Details:"
 
 #. Default: "Street:"
 #: ./browser/order.pt:44
 msgid "order_street"
-msgstr "Street:"
+msgstr ""
 
 #. Default: "Order Summary:"
 #: ./browser/order.pt:82
 msgid "order_summary"
-msgstr "Order Summary:"
+msgstr ""
 
 #. Default: "Net: ${value} ${currency}"
 #: ./mailnotify.py:106
 msgid "order_summary_cart_net"
-msgstr "Net: ${value} ${currency}"
+msgstr ""
 
 #. Default: "Total: ${value} ${currency}"
 #: ./mailnotify.py:201
 msgid "order_summary_cart_total"
-msgstr "Total: ${value} ${currency}"
+msgstr ""
 
 #. Default: "VAT: ${value} ${currency}"
 #: ./mailnotify.py:116
@@ -514,12 +514,12 @@ msgstr "VAT: ${value} ${currency}"
 #. Default: "Discount Net: ${value} ${currency}"
 #: ./mailnotify.py:128
 msgid "order_summary_discount_net"
-msgstr "Discount Net: ${value} ${currency}"
+msgstr "Net Discount: ${value} ${currency}"
 
 #. Default: "Discount Total: ${value} ${currency}"
 #: ./mailnotify.py:148
 msgid "order_summary_discount_total"
-msgstr "Discount Total: ${value} ${currency}"
+msgstr "Total Discount"
 
 #. Default: "Discount VAT: ${value} ${currency}"
 #: ./mailnotify.py:138
@@ -529,22 +529,22 @@ msgstr "Discount VAT: ${value} ${currency}"
 #. Default: "Summary:"
 #: ./mailnotify.py:210
 msgid "order_summary_label"
-msgstr "Summary:"
+msgstr ""
 
 #. Default: "Shipping: ${label}"
 #: ./mailnotify.py:161
 msgid "order_summary_shipping_label"
-msgstr "Shipping: ${label}"
+msgstr ""
 
 #. Default: "Shipping Net: ${value} ${currency}"
 #: ./mailnotify.py:172
 msgid "order_summary_shipping_net"
-msgstr "Shipping Net: ${value} ${currency}"
+msgstr "Net Shipping: ${value} ${currency}"
 
 #. Default: "Shipping Total: ${value} ${currency}"
 #: ./mailnotify.py:192
 msgid "order_summary_shipping_total"
-msgstr "Shipping Total: ${value} ${currency}"
+msgstr "Total Shipping: ${value} ${currency}"
 
 #. Default: "Shipping VAT: ${value} ${currency}"
 #: ./mailnotify.py:182
@@ -554,17 +554,17 @@ msgstr "Shipping VAT: ${value} ${currency}"
 #. Default: "Thanks for your Order."
 #: ./browser/views.py:1268
 msgid "order_text"
-msgstr "Thanks for your Order."
+msgstr "Thank you for your order"
 
 #. Default: "Total:"
 #: ./browser/order.pt:117
 msgid "order_total"
-msgstr "Total:"
+msgstr ""
 
 #. Default: "Order UID:"
 #: ./browser/order.pt:15
 msgid "order_uid"
-msgstr "Order UID:"
+msgstr ""
 
 #. Default: "VAT:"
 #: ./browser/order.pt:99
@@ -574,68 +574,68 @@ msgstr "VAT:"
 #. Default: "ZIP/City:"
 #: ./browser/order.pt:47
 msgid "order_zip_city"
-msgstr "ZIP/City:"
+msgstr "Post Code/City:"
 
 #. Default: "Orders"
 #: ./browser/orders.pt:8
 msgid "orders"
-msgstr "Orders"
+msgstr ""
 
 #. Default: "Personal Data:"
 #: ./browser/order.pt:24
 msgid "personal_data"
-msgstr "Personal Data:"
+msgstr "Customer Details:"
 
 #. Default: "Process"
 #: ./vocabularies.py:28
 msgid "process"
-msgstr "Process"
+msgstr ""
 
 #. Default: "Processing"
 #: ./vocabularies.py:16
 msgid "processing"
-msgstr "Processing"
+msgstr ""
 
 #. Default: "Renew"
 #: ./vocabularies.py:27
 msgid "renew"
-msgstr "Renew"
+msgstr ""
 
 #. Default: "Reservation Done"
 #: ./browser/views.py:1250
 msgid "reservation_done"
-msgstr "Reservation Done"
+msgstr ""
 
 #. Default: "Thanks for your Reservation."
 #: ./browser/views.py:1266
 msgid "reservation_text"
-msgstr "Thanks for your Reservation."
+msgstr "Thank you for your back-order"
 
 #. Default: "Reserved"
 #: ./browser/order.pt:193
 #: ./mailnotify.py:67
 #: ./vocabularies.py:19
 msgid "reserved"
-msgstr "Reserved"
+msgstr "On back-order"
 
 #. Default: "Salaried"
 #: ./browser/views.py:405
 msgid "salaried"
-msgstr "Salaried"
+msgstr "Paid"
 
 #. Default: "Select all visible orders"
 #: ./browser/views.py:473
 msgid "select_all_orders"
-msgstr "Select all visible orders"
+msgstr ""
 
 # send
 msgid "send"
-msgstr "send"
+msgstr "Send"
 
 #. Default: "State"
 #: ./browser/views.py:409
 msgid "state"
-msgstr "State"
+msgstr ""
 
 # subject
 msgid "subject"
@@ -643,7 +643,7 @@ msgstr "Subject"
 
 # subject_required
 msgid "subject_required"
-msgstr "Subject is required"
+msgstr "Subject required"
 
 # template
 msgid "template"
@@ -651,78 +651,78 @@ msgstr "Template"
 
 # text
 msgid "text"
-msgstr "Notification Text"
+msgstr "Text"
 
 # text_placeholders
 msgid "text_placeholders"
-msgstr "Text with placeholders"
+msgstr "Text placeholders"
 
 # text_required
 msgid "text_required"
-msgstr "Notification Text is required"
+msgstr "Text required"
 
 #. Default: "Example Value"
 #: ./browser/mailtemplates_view.pt:54
 msgid "th_mailtemplatelib_example"
-msgstr "Example Value"
+msgstr ""
 
 #. Default: "Placeholder"
 #: ./browser/mailtemplates_view.pt:53
 msgid "th_mailtemplatelib_placeholder"
-msgstr "Placeholder"
+msgstr ""
 
 #. Default: "Can Buy"
 #: ./localroles.py:17
 msgid "title_customer_role"
-msgstr "Can Buy"
+msgstr ""
 
 #. Default: "Can Sell"
 #: ./localroles.py:10
 msgid "title_vendor_role"
-msgstr "Can Sell"
+msgstr ""
 
 # to_date
 msgid "to_date"
-msgstr "to date"
+msgstr "To Date"
 
 # to_date_required
 msgid "to_date_required"
-msgstr "to date is required"
+msgstr "To Date required"
 
 #. Default: "Transaction ID:"
 #: ./browser/order.pt:74
 msgid "transaction_id"
-msgstr "Transaction ID:"
+msgstr ""
 
 #. Default: "Unknown"
 #: ./browser/views.py:776
 #: ./common.py:271
 #: ./upgrades.py:219
 msgid "unknown"
-msgstr "Unknown"
+msgstr ""
 
 #. Default: "Unknown Order"
 #: ./browser/views.py:1253
 msgid "unknown_order"
-msgstr "Unknown Order"
+msgstr ""
 
 #. Default: "Sorry, this order does not exist."
 #: ./browser/views.py:1270
 msgid "unknown_order_text"
-msgstr "Sorry, this order does not exist."
+msgstr ""
 
 # vendor_filter
 msgid "vendor_filter"
-msgstr "Vendor"
+msgstr "Vendor Filter"
 
 #. Default: "View Order"
 #: ./browser/views.py:506
 msgid "view_order"
-msgstr "View Order"
+msgstr ""
 
 #. Default: "Yes"
 #: ./browser/views.py:783
 #: ./vocabularies.py:37
 msgid "yes"
-msgstr "Yes"
+msgstr ""
 

@@ -15,6 +15,7 @@ from bda.plone.orders.interfaces import INotificationSettings
 from bda.plone.orders.interfaces import IPaymentText
 from bda.plone.orders.mailtemplates import get_order_templates
 from bda.plone.orders.mailtemplates import get_reservation_templates
+from bda.plone.orders.browser.views import reserved
 from bda.plone.payment.interfaces import IPaymentEvent
 from email.Header import Header
 from email.MIMEText import MIMEText
@@ -48,6 +49,7 @@ def create_mail_listing(context, order_data):
     """Create item listing for notification mail.
     """
     lines = []
+    request = getRequest()
     for booking in order_data.bookings:
         brain = get_catalog_brain(context, booking.attrs['buyable_uid'])
         # fetch buyable
@@ -58,10 +60,17 @@ def create_mail_listing(context, order_data):
         comment = booking.attrs['buyable_comment']
         if comment:
             title = '%s (%s)' % (title, comment)
+        backorder = reserved(
+                booking.attrs['remaining_stock_available'],
+                booking.attrs['buyable_count'])
+        if backorder:
+            backorder = u'(%s %s)' % (backorder, translate(_('reserved'),
+                context=request))
         # XXX: price and discount
-        line = '{count: 4f} {title}'.format(
+        line = '{count: 4f} {title} {backorder}'.format(
             count=booking.attrs['buyable_count'],
-            title=title
+            title=title,
+            backorder=backorder,
         )
         lines.append(line)
         if comment:
@@ -342,11 +351,10 @@ class MailNotify(object):
             from_name = str(Header(safe_unicode(shop_manager_name), 'utf-8'))
             mailfrom = formataddr((from_name, shop_manager_address))
         mailhost = getToolByName(self.context, 'MailHost')
-        message = MIMEText(message, _subtype='plain')
-        message.set_charset('utf-8')
+        message = MIMEText(message, _subtype='plain', _charset='utf-8')
         message['Subject'] = Header(subject, 'utf-8')
         message['From_'] = mailfrom
         message['From'] = mailfrom
-        message['To'] = Header(receiver, 'utf-8')
+        message['To'] = str(Header(safe_unicode(receiver), 'utf-8'))
         message.add_header('Date', formatdate(localtime=True))
         mailhost.send(messageText=message, mto=receiver)
