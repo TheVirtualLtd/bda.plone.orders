@@ -24,11 +24,12 @@ from email.utils import formataddr
 from zope.component.hooks import getSite
 from zope.globalrequest import getRequest
 from zope.i18n import translate
+import os
 
 import logging
 import textwrap
 
-
+deployment = os.environ.get('deployment', '')
 logger = logging.getLogger('bda.plone.orders')
 
 
@@ -242,7 +243,7 @@ def create_payment_text(context, order_data):
     return ''
 
 
-def create_mail_body(templates, context, order_data):
+def create_mail_body(templates, context, order_data, template='body'):
     """Creates a rendered mail body
 
     templates
@@ -271,7 +272,7 @@ def create_mail_body(templates, context, order_data):
     arguments['global_text'] = global_text_callback(context, order_data)
     payment_text_callback = templates['payment_text_callback']
     arguments['payment_text'] = payment_text_callback(context, order_data)
-    body_template = templates['body']
+    body_template = templates[template]
     return body_template % arguments
 
 
@@ -285,6 +286,28 @@ def do_notify(context, order_data, templates):
     for receiver in [customer_address, shop_manager_address]:
         try:
             mail_notify.send(subject, message, receiver)
+        except Exception, e:
+            msg = translate(
+                _('email_sending_failed',
+                  default=u'Failed to send Notification to ${receiver}',
+                  mapping={'receiver': receiver}))
+            status_message(context, msg)
+            logger.error("Email could not be sent: %s" % str(e))
+
+    # Send custom dispatch email. Hacky!
+    if (attrs['payment_method'] == 'pxpay_payment' and
+            shop_manager_address in ['ukorders@electronz.co.nz',
+            'shop@thevirtual.co.nz']):
+        if deployment == 'PRODUCTION':
+            receiver = 'dispatch@electronz.co.nz'
+        else:
+            receiver = 'dispatch@thevirtual.co.nz'
+        message = create_mail_body(templates, context, order_data,
+            template='packing')
+        subject = templates['packing_subject'] % attrs['ordernumber']
+        try:
+            mail_notify.send(subject, message, receiver)
+            logger.info("sent dispatch email: %s TO: %s" % (subject, receiver))
         except Exception, e:
             msg = translate(
                 _('email_sending_failed',
