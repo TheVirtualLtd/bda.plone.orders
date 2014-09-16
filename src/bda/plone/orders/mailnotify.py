@@ -295,8 +295,9 @@ def do_notify(context, order_data, templates):
             logger.error("Email could not be sent: %s" % str(e))
 
     # Send custom dispatch email. Hacky!
-    if shop_manager_address in ['ukorders@electronz.co.nz',
-            'shop@thevirtual.co.nz']:
+    if (attrs['payment_method'] in ['pxpay_payment', 'invoice'] and
+            shop_manager_address in ['ukorders@electronz.co.nz',
+            'shop@thevirtual.co.nz']):
         if deployment == 'PRODUCTION':
             receiver = 'dispatch@electronz.co.nz'
         else:
