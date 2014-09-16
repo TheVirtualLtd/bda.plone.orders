@@ -301,20 +301,21 @@ def do_notify(context, order_data, templates):
         if deployment == 'PRODUCTION':
             receiver = 'dispatch@electronz.co.nz'
         else:
-            receiver = 'dispatch@thevirtual.co.nz'
+            receivers = ['dispatch@thevirtual.co.nz', 'test@electronz.co.nz']
         message = create_mail_body(templates, context, order_data,
             template='packing')
         subject = templates['packing_subject'] % attrs['ordernumber']
-        try:
-            mail_notify.send(subject, message, receiver)
-            logger.info("sent dispatch email: %s TO: %s" % (subject, receiver))
-        except Exception, e:
-            msg = translate(
-                _('email_sending_failed',
-                  default=u'Failed to send Notification to ${receiver}',
-                  mapping={'receiver': receiver}))
-            status_message(context, msg)
-            logger.error("Email could not be sent: %s" % str(e))
+        for receiver in receivers:
+            try:
+                mail_notify.send(subject, message, receiver)
+                logger.info("sent dispatch email: %s TO: %s" % (subject, receiver))
+            except Exception, e:
+                msg = translate(
+                    _('email_sending_failed',
+                      default=u'Failed to send Notification to ${receiver}',
+                      mapping={'receiver': receiver}))
+                status_message(context, msg)
+                logger.error("Email could not be sent: %s" % str(e))
 
 
 def get_order_uid(event):
