@@ -295,9 +295,8 @@ def do_notify(context, order_data, templates):
             logger.error("Email could not be sent: %s" % str(e))
 
     # Send custom dispatch email. Hacky!
-    if (attrs['payment_method'] == 'pxpay_payment' and
-            shop_manager_address in ['ukorders@electronz.co.nz',
-            'shop@thevirtual.co.nz']):
+    if shop_manager_address in ['ukorders@electronz.co.nz',
+            'shop@thevirtual.co.nz']:
         if deployment == 'PRODUCTION':
             receiver = 'dispatch@electronz.co.nz'
         else:
@@ -308,7 +307,8 @@ def do_notify(context, order_data, templates):
         for receiver in receivers:
             try:
                 mail_notify.send(subject, message, receiver)
-                logger.info("sent dispatch email: %s TO: %s" % (subject, receiver))
+                logger.info("sent dispatch email: %s TO: %s"
+                        % (subject, receiver))
             except Exception, e:
                 msg = translate(
                     _('email_sending_failed',
