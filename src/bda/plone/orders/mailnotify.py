@@ -15,7 +15,6 @@ from bda.plone.orders.interfaces import INotificationSettings
 from bda.plone.orders.interfaces import IPaymentText
 from bda.plone.orders.mailtemplates import get_order_templates
 from bda.plone.orders.mailtemplates import get_reservation_templates
-from bda.plone.orders.browser.views import reserved
 from bda.plone.payment.interfaces import IPaymentEvent
 from email.Header import Header
 from email.MIMEText import MIMEText
@@ -24,12 +23,11 @@ from email.utils import formataddr
 from zope.component.hooks import getSite
 from zope.globalrequest import getRequest
 from zope.i18n import translate
-import os
 
 import logging
 import textwrap
 
-deployment = os.environ.get('deployment', '')
+
 logger = logging.getLogger('bda.plone.orders')
 
 
@@ -50,7 +48,6 @@ def create_mail_listing(context, order_data):
     """Create item listing for notification mail.
     """
     lines = []
-    request = getRequest()
     for booking in order_data.bookings:
         brain = get_catalog_brain(context, booking.attrs['buyable_uid'])
         # fetch buyable
@@ -61,17 +58,10 @@ def create_mail_listing(context, order_data):
         comment = booking.attrs['buyable_comment']
         if comment:
             title = '%s (%s)' % (title, comment)
-        backorder = reserved(
-                booking.attrs['remaining_stock_available'],
-                booking.attrs['buyable_count'])
-        if backorder:
-            backorder = u'(%s %s)' % (backorder, translate(_('reserved'),
-                context=request))
         # XXX: price and discount
-        line = '{count: 4f} {title} {backorder}'.format(
+        line = '{count: 4f} {title}'.format(
             count=booking.attrs['buyable_count'],
-            title=title,
-            backorder=backorder,
+            title=title
         )
         lines.append(line)
         if comment:
@@ -243,7 +233,7 @@ def create_payment_text(context, order_data):
     return ''
 
 
-def create_mail_body(templates, context, order_data, template='body'):
+def create_mail_body(templates, context, order_data):
     """Creates a rendered mail body
 
     templates
@@ -272,7 +262,7 @@ def create_mail_body(templates, context, order_data, template='body'):
     arguments['global_text'] = global_text_callback(context, order_data)
     payment_text_callback = templates['payment_text_callback']
     arguments['payment_text'] = payment_text_callback(context, order_data)
-    body_template = templates[template]
+    body_template = templates['body']
     return body_template % arguments
 
 
@@ -293,30 +283,6 @@ def do_notify(context, order_data, templates):
                   mapping={'receiver': receiver}))
             status_message(context, msg)
             logger.error("Email could not be sent: %s" % str(e))
-
-    # Send custom dispatch email. Hacky!
-    if (attrs['payment_method'] in ['pxpay_payment', 'invoice'] and
-            shop_manager_address in ['ukorders@electronz.co.nz',
-            'shop@thevirtual.co.nz']):
-        if deployment == 'PRODUCTION':
-            receiver = 'dispatch@electronz.co.nz'
-        else:
-            receivers = ['dispatch@thevirtual.co.nz', 'test@electronz.co.nz']
-        message = create_mail_body(templates, context, order_data,
-            template='packing')
-        subject = templates['packing_subject'] % attrs['ordernumber']
-        for receiver in receivers:
-            try:
-                mail_notify.send(subject, message, receiver)
-                logger.info("sent dispatch email: %s TO: %s"
-                        % (subject, receiver))
-            except Exception, e:
-                msg = translate(
-                    _('email_sending_failed',
-                      default=u'Failed to send Notification to ${receiver}',
-                      mapping={'receiver': receiver}))
-                status_message(context, msg)
-                logger.error("Email could not be sent: %s" % str(e))
 
 
 def get_order_uid(event):
@@ -376,10 +342,11 @@ class MailNotify(object):
             from_name = str(Header(safe_unicode(shop_manager_name), 'utf-8'))
             mailfrom = formataddr((from_name, shop_manager_address))
         mailhost = getToolByName(self.context, 'MailHost')
-        message = MIMEText(message, _subtype='plain', _charset='utf-8')
+        message = MIMEText(message, _subtype='plain')
+        message.set_charset('utf-8')
         message['Subject'] = Header(subject, 'utf-8')
         message['From_'] = mailfrom
         message['From'] = mailfrom
-        message['To'] = str(Header(safe_unicode(receiver), 'utf-8'))
+        message['To'] = Header(receiver, 'utf-8')
         message.add_header('Date', formatdate(localtime=True))
         mailhost.send(messageText=message, mto=receiver)
