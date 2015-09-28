@@ -48,6 +48,16 @@ import urllib
 import uuid
 
 
+def reserved(available, ordered):
+    reserved = ''
+    if available and available < 0.0 and ordered > 0.0:
+        available = Decimal(available)
+        reserved = ordered
+        if ordered + available > 0.0:
+            reserved = ordered + available
+    return reserved
+
+
 class Translate(object):
 
     def __init__(self, request):
@@ -165,6 +175,9 @@ class Transition(BrowserView):
             )
         else:
             raise ValueError('subtype must be either "order" or "booking"!')
+        # disable diazo theming if ajax call
+        if '_' in self.request.form:
+            self.request.response.setHeader('X-Theme-Disabled', 'True')
         return self.dropdown(self.context, self.request, record).render()
 
 
@@ -278,6 +291,9 @@ class OrdersView(OrdersViewBase):
         # check if authenticated user is vendor
         if not get_vendors_for():
             raise Unauthorized
+        # disable diazo theming if ajax call
+        if '_' in self.request.form:
+            self.request.response.setHeader('X-Theme-Disabled', 'True')
         return super(OrdersView, self).__call__()
 
 
@@ -586,6 +602,8 @@ class OrdersData(OrdersTable, TableData):
                         reverse=sort['reverse'],
                         with_size=True)
         length = res.next()
+        #self.request.response.setHeader("Content-type", "application/json")
+        self.request.response.setHeader('X-Theme-Disabled', 'True')
         return length, res
 
 
@@ -692,6 +710,9 @@ class OrderViewBase(BrowserView):
                 'uid': booking.attrs['uid'],
                 'title': booking.attrs['title'],
                 'url': obj.absolute_url(),
+                'reserved': reserved(
+                    booking.attrs['remaining_stock_available'],
+                    booking.attrs['buyable_count']),
                 'count': booking.attrs['buyable_count'],
                 'net': ascur(booking.attrs.get('net', 0.0)),
                 'discount_net': ascur(float(booking.attrs['discount_net'])),
@@ -737,7 +758,7 @@ class OrderViewBase(BrowserView):
 
     @property
     def tid(self):
-        tid = [it for it in self.order_data.tid if it != 'none']
+        tid = [str(it) for it in self.order_data.tid if it != 'none']
         if not tid:
             return _('none', default=u'None')
         return ', '.join(tid)
@@ -780,6 +801,9 @@ class OrderView(OrderViewBase):
             self.vendor_uids = get_vendor_uids_for()
             if not self.vendor_uids:
                 raise Unauthorized
+        # disable diazo theming if ajax call
+        if '_' in self.request.form:
+            self.request.response.setHeader('X-Theme-Disabled', 'True')
         return super(OrderView, self).__call__()
 
     @property
@@ -802,6 +826,9 @@ class MyOrderView(OrderViewBase):
         user = plone.api.user.get_current()
         if user.getId() != self.order['creator']:
             raise Unauthorized
+        # disable diazo theming if ajax call
+        if '_' in self.request.form:
+            self.request.response.setHeader('X-Theme-Disabled', 'True')
         return super(MyOrderView, self).__call__()
 
     @property

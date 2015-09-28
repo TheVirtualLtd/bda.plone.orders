@@ -135,6 +135,9 @@ class NotifyCustomers(YAMLBaseForm):
         # XXX: security check -> current user has valid vandor area?
         ajax_form_fiddle(
             self.request, 'form[id=form-notify_customers]', 'replace')
+        # disable diazo theming if ajax call
+        if '_' in self.request.form:
+            self.request.response.setHeader('X-Theme-Disabled', 'True')
         return self.render_form()
 
 
