@@ -135,6 +135,14 @@
     layer="..interfaces.IOrdersExtensionLayer"/>
 
   <browser:page
+    for="zope.component.interfaces.ISite"
+    name="add_order_items_to_cart"
+    template="add_order_items_to_cart.pt"
+    class=".views.AddOrderItemsToCartView"
+    permission="bda.plone.orders.ViewOwnOrders"
+    layer="..interfaces.IOrdersExtensionLayer"/>
+
+  <browser:page
     for="*"
     name="booking_cancel"
     class=".views.BookingCancel"

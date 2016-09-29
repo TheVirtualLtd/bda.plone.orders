@@ -246,6 +246,17 @@ def create_order_summary(context, order_data):
                 'currency': currency,
             })
         lines.append(translate(order_summary_shipping_total, context=request))
+        # surcharge
+    surcharge = order_data.surcharge
+    if surcharge:
+        order_summary_surcharge = _(
+            'order_summary_surcharge',
+            default=u'Surcharge ${value} ${currency}',
+            mapping={
+                'value': ascur(surcharge),
+                'currency': currency,
+            })
+        lines.append(translate(order_summary_surcharge, context=request))
     # cart total
     order_summary_cart_total = _(
         'order_summary_cart_total',

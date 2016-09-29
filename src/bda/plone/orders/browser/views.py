@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from AccessControl import Unauthorized
 from bda.plone.cart import ascur
+from bda.plone.cart import add_item_to_cart
 from bda.plone.cart import get_object_by_uid
 from bda.plone.checkout import message_factory as _co
 from bda.plone.checkout.vocabularies import get_pycountry_name
@@ -24,6 +25,7 @@ from bda.plone.orders.interfaces import IBuyable
 from bda.plone.orders.transitions import transitions_of_main_state
 from bda.plone.orders.transitions import transitions_of_salaried_state
 from bda.plone.orders.transitions import do_transition_for_booking
+from decimal import Decimal
 from plone.memoize import view
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five import BrowserView
@@ -547,7 +549,21 @@ class MyOrdersTable(OrdersTableBase):
             'title': _('view_order', default=u'View Order'),
         }
         view_order = tag('a', '&nbsp;', **view_order_attrs)
-        return view_order
+
+        add_order_items_to_cart_attrs = {
+            'ajax:bind': 'click',
+            'ajax:target': view_order_target,
+            'ajax:overlay': 'add_order_items_to_cart',
+            'class_': 'go_to_cart_action',
+            'href': '',
+            'title': _('add_order_items_to_cart',
+                       default=u'Add Order Items To Cart'),
+        }
+        add_order_items_to_cart = tag('a',
+                                      '&nbsp;',
+                                      **add_order_items_to_cart_attrs)
+
+        return view_order + add_order_items_to_cart
 
     def __call__(self):
         # disable diazo theming if ajax call
@@ -683,6 +699,10 @@ class OrderViewBase(BrowserView):
     def shipping(self):
         # B/C
         return ascur(self.order_data.shipping)
+
+    @property
+    def surcharge(self):
+        return ascur(self.order_data.surcharge)
 
     @property
     def total(self):
@@ -834,6 +854,50 @@ class MyOrderView(OrderViewBase):
     @property
     def ordernumber(self):
         return self.order_data.order.attrs['ordernumber']
+
+class AddOrderItemsToCartView(BrowserView):
+    @property
+    @view.memoize
+    def order_data(self):
+        return OrderData(self.context, uid=self.uid)
+
+    @property
+    def order(self):
+        return dict(self.order_data.order.attrs)
+
+    @property
+    def uid(self):
+        return self.request.form['uid']
+
+    @property
+    def listing(self):
+        ret = list()
+        for booking in self.order_data.bookings:
+            obj = get_object_by_uid(self.context, booking.attrs['buyable_uid'])
+            ret.append({
+                'uid': booking.attrs['uid'],
+                'title': booking.attrs['title'],
+                'url': obj.absolute_url(),
+                'count': booking.attrs['buyable_count'],
+                'quantity_unit': booking.attrs.get('quantity_unit'),
+            })
+        return ret
+
+    def __call__(self):
+        # check if order was created by authenticated user
+        user = plone.api.user.get_current()
+        if user.getId() != self.order['creator']:
+            raise Unauthorized
+        # disable diazo theming if ajax call
+        if '_' in self.request.form:
+            self.request.response.setHeader('X-Theme-Disabled', 'True')
+
+        for booking in self.order_data.bookings:
+            add_item_to_cart(
+                request=self.request,
+                uid=booking.attrs['buyable_uid'],
+                count=booking.attrs['buyable_count'])
+        return super(AddOrderItemsToCartView, self).__call__()
 
 
 class DirectOrderView(OrderViewBase):
