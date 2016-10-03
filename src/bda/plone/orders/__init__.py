@@ -38,7 +38,16 @@ def get_country_name(country_code, lang='en'):
     """
 
     country_name = pycountry.countries.get(numeric=country_code).name
-    trans = gettext.translation(
-        'iso3166', pycountry.LOCALES_DIR, languages=['de']
-    )
+    # Handle languages with no iso3166 domain e.g. 'en'. If (when) this fails
+    # fallback to null translations
+    for domain, fallback in [('iso3166', False), ('iso3166_2', True)]:
+        try:
+            trans = gettext.translation(
+               domain, pycountry.LOCALES_DIR, languages=[lang],
+               fallback=fallback
+            )
+            break
+        except IOError:
+            pass
+
     return safe_unicode(trans.gettext(country_name))
