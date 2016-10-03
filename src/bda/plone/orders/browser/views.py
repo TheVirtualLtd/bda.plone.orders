@@ -22,6 +22,7 @@ from bda.plone.orders.interfaces import IBuyable
 from bda.plone.orders.transitions import do_transition_for
 from bda.plone.orders.transitions import transitions_of_main_state
 from bda.plone.orders.transitions import transitions_of_salaried_state
+from decimal import Decimal
 from plone.memoize import view
 from Products.CMFPlone.interfaces import IPloneSiteRoot
 from Products.Five import BrowserView
@@ -45,6 +46,16 @@ import json
 import plone.api
 import urllib
 import uuid
+
+
+def reserved(available, ordered):
+    reserved = ''
+    if available and available < 0.0 and ordered > 0.0:
+        available = Decimal(available)
+        reserved = ordered
+        if ordered + available > 0.0:
+            reserved = ordered + available
+    return reserved
 
 
 class Translate(object):

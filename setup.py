@@ -5,11 +5,7 @@ from setuptools import setup
 import os
 
 
-<<<<<<< HEAD
-version = '0.10.dev0'
-=======
-version = '0.9.dev8.2'
->>>>>>> 2dbdae9516ccf1a2931091282dce88b70d8155c9
+version = '0.10.dev1'
 shortdesc = "Orders persistence and backoffice UI for bda.plone.shop"
 longdesc = open(os.path.join(os.path.dirname(__file__), 'README.rst')).read()
 longdesc += open(os.path.join(os.path.dirname(__file__), 'CHANGES.rst')).read()
