@@ -752,8 +752,12 @@ class OrderViewBase(BrowserView):
         return ascur(self.order_data.shipping)
 
     @property
-    def surcharge(self):
-        return ascur(self.order_data.surcharge)
+    def surcharge_net(self):
+        return ascur(self.order_data.surcharge_net)
+
+    @property
+    def surcharge_vat(self):
+        return ascur(self.order_data.surcharge_vat)
 
     @property
     def total(self):

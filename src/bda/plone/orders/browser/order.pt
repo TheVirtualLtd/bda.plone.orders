@@ -114,8 +114,11 @@
       <strong i18n:translate="order_shipping_costs_vat">Shipping VAT:</strong>
       <span tal:replace="view/shipping_vat">0.00</span>
       <br />
-      <strong i18n:translate="order_surcharge_title">Surcharge:</strong>
-      <span tal:replace="view/surcharge">0.00</span>
+      <strong i18n:translate="order_surcharge_net_title">Surcharge Net:</strong>
+      <span tal:replace="view/surcharge_net">0.00</span>
+      <br />
+      <strong i18n:translate="order_surcharge_vat_title">Surcharge VAT:</strong>
+      <span tal:replace="view/surcharge_vat">0.00</span>
       <br />
       <strong i18n:translate="order_total">Total:</strong>
       <strong tal:content="view/total">0.00</strong>

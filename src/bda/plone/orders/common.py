@@ -336,7 +336,10 @@ class OrderCheckoutAdapter(CheckoutAdapter):
             order.attrs['shipping'] = Decimal(0)
         # surcharge related information
         if cart_data.include_surcharge:
-            order.attrs['surcharge'] = cart_data.data['cart_summary']['surcharge']
+            order.attrs['surcharge_net'] = \
+                cart_data.data['cart_summary']['surcharge_net']
+            order.attrs['surcharge_vat'] = \
+                cart_data.data['cart_summary']['surcharge_vat']
         # create order bookings
         bookings = self.create_bookings(order)
         # set order state, needed for sorting in orders table
@@ -759,10 +762,18 @@ class OrderData(OrderState):
         return float(self.order.attrs['shipping'])
 
     @property
-    def surcharge(self):
+    def surcharge_net(self):
         # XXX: use decimal
         try:
-            return float(self.order.attrs['surcharge'])
+            return float(self.order.attrs['surcharge_net'])
+        except KeyError:
+            return float(0)
+
+    @property
+    def surcharge_vat(self):
+        # XXX: use decimal
+        try:
+            return float(self.order.attrs['surcharge_vat'])
         except KeyError:
             return float(0)
 
@@ -770,7 +781,7 @@ class OrderData(OrderState):
     def total(self):
         # XXX: use decimal
         total = (self.net - self.discount_net + self.vat - self.discount_vat
-                 + self.surcharge)
+                 + self.surcharge_net + self.surcharge_vat)
         return total + self.shipping
 
 
