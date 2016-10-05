@@ -1,7 +1,7 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: bda.plone.orders\n"
-"POT-Creation-Date: 2016-10-03 04:17+0000\n"
+"POT-Creation-Date: 2016-10-05 02:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
 "Last-Translator: Peter Holzer <hpeter@agitator.com>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Domain: bda.plone.orders\n"
 "X-Is-Fallback-For: de-at de-li de-lu de-ch de-de\n"
 
-#: ./browser/views.py:1108
+#: ./browser/views.py:1112
 msgid "Booking cancelled."
 msgstr ""
 
@@ -51,32 +51,32 @@ msgid "all"
 msgstr "Alle"
 
 #. Default: "Please provide the email adress you used for submitting the order."
-#: ./browser/views.py:1029
+#: ./browser/views.py:1033
 msgid "anon_auth_err_email"
 msgstr "Bitte geben Sie die E-Mail Adresse an unter der Sie die Bestellung abgeschlossen haben."
 
 #. Default: "No order could be found for the given credentials"
-#: ./browser/views.py:1038
+#: ./browser/views.py:1042
 msgid "anon_auth_err_order"
 msgstr "Keine Bestellung zu den angegebenen Kriterien gefunden."
 
 #. Default: "Please provide the ordernumber"
-#: ./browser/views.py:1034
+#: ./browser/views.py:1038
 msgid "anon_auth_err_ordernumber"
 msgstr "Bitte geben Sie die Bestellnummer an."
 
 #. Default: "Email"
-#: ./browser/views.py:994
+#: ./browser/views.py:998
 msgid "anon_auth_label_email"
 msgstr "E-Mail"
 
 #. Default: "Ordernumber"
-#: ./browser/views.py:985
+#: ./browser/views.py:989
 msgid "anon_auth_label_ordernumber"
 msgstr "Bestellnummer"
 
 #. Default: "Submit"
-#: ./browser/views.py:1001
+#: ./browser/views.py:1005
 msgid "anon_auth_label_submit"
 msgstr "Absenden"
 
@@ -94,24 +94,24 @@ msgid "billing_address"
 msgstr "Rechnungsadresse:"
 
 #. Default: "<img src=\"${DYNAMIC_CONTENT}\" title=\"cancel booking\" alt=\"cancel booking icon\" />"
-#: ./browser/order.pt:269
+#: ./browser/order.pt:272
 msgid "booking_cancel"
 msgstr ""
 
 #. Default: "comment"
 #: ./browser/bookings.py:412
-#: ./browser/order.pt:204
+#: ./browser/order.pt:207
 msgid "booking_comment"
 msgstr "Kommentar"
 
 #. Default: "count"
 #: ./browser/add_order_items_to_cart.pt:19
-#: ./browser/order.pt:196
+#: ./browser/order.pt:199
 msgid "booking_count"
 msgstr "Anzahl"
 
 #. Default: "currency"
-#: ./browser/order.pt:199
+#: ./browser/order.pt:202
 msgid "booking_currency"
 msgstr "Währung"
 
@@ -121,44 +121,44 @@ msgid "booking_date"
 msgstr "Buchungsdatum"
 
 #. Default: "discount net"
-#: ./browser/order.pt:201
+#: ./browser/order.pt:204
 msgid "booking_discount_net"
 msgstr "Rabatt Netto"
 
 #. Default: "exported"
-#: ./browser/order.pt:203
+#: ./browser/order.pt:206
 msgid "booking_exported"
 msgstr "Exportiert"
 
 #. Default: "net"
-#: ./browser/order.pt:200
+#: ./browser/order.pt:203
 msgid "booking_net"
 msgstr "Netto"
 
 #. Default: "quantity unit"
 #: ./browser/add_order_items_to_cart.pt:20
-#: ./browser/order.pt:198
+#: ./browser/order.pt:201
 msgid "booking_quantity_unit"
 msgstr "Einheit"
 
 #. Default: "salaried"
-#: ./browser/order.pt:206
+#: ./browser/order.pt:209
 msgid "booking_salaried"
 msgstr "Bezahlt"
 
 #. Default: "state"
-#: ./browser/order.pt:205
+#: ./browser/order.pt:208
 msgid "booking_state"
 msgstr "Status"
 
 #. Default: "title"
 #: ./browser/add_order_items_to_cart.pt:18
-#: ./browser/order.pt:195
+#: ./browser/order.pt:198
 msgid "booking_title"
 msgstr "Titel"
 
 #. Default: "vat"
-#: ./browser/order.pt:202
+#: ./browser/order.pt:205
 msgid "booking_vat"
 msgstr "USt"
 
@@ -242,7 +242,7 @@ msgid "date"
 msgstr "Datum"
 
 #. Default: "Delivery Address:"
-#: ./browser/order.pt:128
+#: ./browser/order.pt:131
 msgid "delivery_address"
 msgstr "Lieferadresse:"
 
@@ -254,7 +254,7 @@ msgid "email"
 msgstr "E-Mail"
 
 #. Default: "Failed to send notification to ${receiver}"
-#: ./mailnotify.py:411
+#: ./mailnotify.py:419
 #, fuzzy
 msgid "email_sending_failed"
 msgstr "Benachrichtigung an ${receiver} konnte nicht versandt werden."
@@ -448,7 +448,7 @@ msgid "new"
 msgstr "Neu"
 
 #. Default: "No"
-#: ./browser/views.py:853
+#: ./browser/views.py:857
 #: ./vocabularies.py:41
 msgid "no"
 msgstr "Nein"
@@ -469,7 +469,7 @@ msgid "no_template_selected"
 msgstr "Keine Vorlage ausgewählt"
 
 #. Default: "None"
-#: ./browser/views.py:836
+#: ./browser/views.py:840
 msgid "none"
 msgstr "Keine"
 
@@ -484,22 +484,22 @@ msgstr "Kunden Benachrichtigen"
 
 #. Default: "Order Bookings:"
 #: ./browser/add_order_items_to_cart.pt:10
-#: ./browser/order.pt:187
+#: ./browser/order.pt:190
 msgid "order_bookings"
 msgstr "Buchungen:"
 
 #. Default: "Order Comment:"
-#: ./browser/order.pt:166
+#: ./browser/order.pt:169
 msgid "order_comment"
 msgstr "Kommentar:"
 
 #. Default: "Order Comment:"
-#: ./browser/order.pt:176
+#: ./browser/order.pt:179
 msgid "order_comment_comment"
 msgstr ""
 
 #. Default: "Purchase Order:"
-#: ./browser/order.pt:167
+#: ./browser/order.pt:170
 msgid "order_comment_purchase_order"
 msgstr ""
 
@@ -534,7 +534,7 @@ msgid "order_discount_vat"
 msgstr "Rabatt USt.:"
 
 #. Default: "Order Done"
-#: ./browser/views.py:1065
+#: ./browser/views.py:1069
 msgid "order_done"
 msgstr "Bestellung abgeschlossen"
 
@@ -564,17 +564,17 @@ msgid "order_net"
 msgstr "Netto:"
 
 #. Default: "No Comment"
-#: ./browser/order.pt:179
+#: ./browser/order.pt:182
 msgid "order_no_comment"
 msgstr "Kein Kommentar"
 
 #. Default: "No delivery Address defined"
-#: ./browser/order.pt:160
+#: ./browser/order.pt:163
 msgid "order_no_delivery_address"
 msgstr "Keine Lieferadresse angegeben"
 
 #. Default: "No Purchase Order"
-#: ./browser/order.pt:170
+#: ./browser/order.pt:173
 msgid "order_no_purchase_order"
 msgstr ""
 
@@ -644,7 +644,7 @@ msgid "order_summary_cart_net"
 msgstr "Netto: ${value} ${currency}"
 
 #. Default: "Total: ${value} ${currency}"
-#: ./mailnotify.py:273
+#: ./mailnotify.py:283
 msgid "order_summary_cart_total"
 msgstr "Gesamt: ${value} ${currency}"
 
@@ -669,7 +669,7 @@ msgid "order_summary_discount_vat"
 msgstr "Rabatt Ust: ${value} ${currency}"
 
 #. Default: "Summary:"
-#: ./mailnotify.py:282
+#: ./mailnotify.py:292
 msgid "order_summary_label"
 msgstr "Zusammenfassung:"
 
@@ -693,23 +693,33 @@ msgstr "Versand Gesamt: ${value} ${currency}"
 msgid "order_summary_shipping_vat"
 msgstr "Versand Ust: ${value} ${currency}"
 
-#. Default: "Surcharge ${value} ${currency}"
+#. Default: "Surcharge Net ${value} ${currency}"
 #: ./mailnotify.py:264
-msgid "order_summary_surcharge"
+msgid "order_summary_surcharge_net"
 msgstr ""
 
-#. Default: "Surcharge:"
+#. Default: "Surcharge VAT ${value} ${currency}"
+#: ./mailnotify.py:274
+msgid "order_summary_surcharge_vat"
+msgstr ""
+
+#. Default: "Surcharge Net:"
 #: ./browser/order.pt:117
-msgid "order_surcharge_title"
+msgid "order_surcharge_net_title"
+msgstr ""
+
+#. Default: "Surcharge VAT:"
+#: ./browser/order.pt:120
+msgid "order_surcharge_vat_title"
 msgstr ""
 
 #. Default: "Thanks for your Order."
-#: ./browser/views.py:1082
+#: ./browser/views.py:1086
 msgid "order_text"
 msgstr "Viele Dank für Ihre Bestellung."
 
 #. Default: "Total:"
-#: ./browser/order.pt:120
+#: ./browser/order.pt:123
 msgid "order_total"
 msgstr "Gesamt:"
 
@@ -769,17 +779,17 @@ msgid "renew"
 msgstr "auf neu setzen"
 
 #. Default: "Reservation Done"
-#: ./browser/views.py:1064
+#: ./browser/views.py:1068
 msgid "reservation_done"
 msgstr "Reservierung eingelangt"
 
 #. Default: "Thanks for your Reservation."
-#: ./browser/views.py:1080
+#: ./browser/views.py:1084
 msgid "reservation_text"
 msgstr "Vielen Dank für Ihre Reservierung"
 
 #. Default: "Reserved"
-#: ./browser/order.pt:197
+#: ./browser/order.pt:200
 #: ./vocabularies.py:22
 msgid "reserved"
 msgstr "Reserviert"
@@ -874,19 +884,19 @@ msgid "transaction_id"
 msgstr "Transaktions ID:"
 
 #. Default: "Unknown"
-#: ./browser/views.py:846
+#: ./browser/views.py:850
 #: ./common.py:302
 #: ./upgrades.py:228
 msgid "unknown"
 msgstr "unbekannt"
 
 #. Default: "Unknown Order"
-#: ./browser/views.py:1067
+#: ./browser/views.py:1071
 msgid "unknown_order"
 msgstr "Unbekannte Bestellung"
 
 #. Default: "Sorry, this order does not exist."
-#: ./browser/views.py:1084
+#: ./browser/views.py:1088
 msgid "unknown_order_text"
 msgstr "Entschuldigen Sie bitte, Diese Bestellung existiert nicht."
 
@@ -910,7 +920,7 @@ msgid "view_orders"
 msgstr "Bestellungen ansehen"
 
 #. Default: "Yes"
-#: ./browser/views.py:853
+#: ./browser/views.py:857
 #: ./vocabularies.py:40
 msgid "yes"
 msgstr "Ja"
