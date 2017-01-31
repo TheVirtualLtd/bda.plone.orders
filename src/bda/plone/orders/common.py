@@ -478,6 +478,9 @@ def is_billable_booking(booking):
     To be used in Pythons filter function::
         filter(is_billable_booking, bookings)
     """
+    # returning True to avoid not charging people for items on back-order
+    # see bda.plone.orders github issue
+    return True
     return booking.attrs['state'] not in (
         ifaces.STATE_RESERVED, ifaces.STATE_CANCELLED
     )

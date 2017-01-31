@@ -53,6 +53,8 @@ ORDER_EXPORT_ATTRS = [
     'ordernumber',
     'cart_discount_net',
     'cart_discount_vat',
+    'surcharge_net',
+    'surcharge_vat',
     'personal_data.company',
     'personal_data.email',
     'personal_data.gender',
