@@ -41,6 +41,7 @@ Comment:
 
 Ordered items:
 %(item_listing)s
+%(reserved_item_listing)s
 
 %(order_summary)s%(global_text)s%(payment_text)s
 """

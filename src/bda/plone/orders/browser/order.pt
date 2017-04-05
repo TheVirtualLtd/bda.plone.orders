@@ -44,6 +44,10 @@
       <strong i18n:translate="order_street">Street:</strong>
       <span tal:replace="order/billing_address.street">street</span>
       <br />
+      <strong i18n:translate="order_suburb">Suburb:</strong>
+      <span tal:content="order/billing_address.suburb"
+          tal:condition="order/billing_address.suburb|nothing">suburb</span>
+      <br />
       <strong i18n:translate="order_zip_city">ZIP/City:</strong>
       <span tal:replace="order/billing_address.zip">zip</span>
       <span tal:replace="order/billing_address.city">city</span>
